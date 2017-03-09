@@ -38,7 +38,7 @@ int main (int argc, char * argv[])
 	mainMusic.setVolume (1);
 	//mainMusic.play ();
 
-	// Create the left paddle
+	//Create the left paddle
 	sf::RectangleShape leftPaddle;
 	leftPaddle.setSize (paddleSize - sf::Vector2f (3, 3));
 	leftPaddle.setOutlineThickness (3);
@@ -47,7 +47,7 @@ int main (int argc, char * argv[])
 	leftPaddle.setOrigin (paddleSize / 2.f);
 	leftPaddle.setPosition (20, 200);
 
-	// Create the right paddle
+	//Create the right paddle
 	sf::RectangleShape rightPaddle;
 	rightPaddle.setSize (paddleSize - sf::Vector2f (3, 3));
 	rightPaddle.setOutlineThickness (3);
@@ -56,7 +56,7 @@ int main (int argc, char * argv[])
 	rightPaddle.setOrigin (paddleSize / 2.f);
 	rightPaddle.setPosition (680, 200);
 
-	// Create the ball
+	//Create the ball
 	sf::CircleShape ball;
 	ball.setRadius (ballRadius - 3);
 	ball.setOutlineThickness (3);
