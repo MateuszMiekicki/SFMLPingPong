@@ -19,9 +19,7 @@ int main (int argc, char * argv[])
 	float ballSpeedX = 5.0, ballSpeedY = 0.0;
 	const std::string SEPARATION = "|";
 	int scorePlayerFirst = 0, scorePlayerSecond = 0;
-	std::string scorePlayerFirstConversion = std::to_string (scorePlayerFirst);
-	std::string scorePlayerSecondConversion = std::to_string (scorePlayerSecond);
-	std::string scoreGame = scorePlayerFirstConversion + SEPARATION + scorePlayerSecondConversion;
+	
 	float ballRadius = 10.f;
 	sf::Vector2f paddleSize (PADDLE_WIDTH, PADDLE_HEIGHT);
 
@@ -65,11 +63,7 @@ int main (int argc, char * argv[])
 	ball.setOrigin (ballRadius / 2, ballRadius / 2);
 	ball.setPosition (350, 200);
 
-	//TODO: Score
-	sf::Text scoreText ("st", mainFont);
-	scoreText.setCharacterSize (30);
-	scoreText.setStyle (sf::Text::Bold);
-	scoreText.setPosition (325, 10);
+	
 
 	//Main settings of windows
 	sf::RenderWindow mainWindow (sf::VideoMode (WIDTH, HEIGHT, DEPTH_OF_COLOR), "PING-PONG", sf::Style::Titlebar | sf::Style::Close);
@@ -84,7 +78,10 @@ int main (int argc, char * argv[])
 			if (eventCloseMainWindow.type == sf::Event::Closed)
 				mainWindow.close ();
 		}
-
+		
+		std::string scorePlayerFirstConversionToString = std::to_string (scorePlayerFirst);
+		std::string scorePlayerSecondConversionToString = std::to_string (scorePlayerSecond);
+		
 		//Limit move right paddle
 		if (rightPaddle.getPosition ().y < 0)
 		{
@@ -133,23 +130,25 @@ int main (int argc, char * argv[])
 		if (ballCollision.intersects (rightPaddleCollision))
 		{
 			ballSpeedX = -5;
-			ballSpeedY = 3;
-			ball.move (ballSpeedX, ballSpeedY);
 			ballSpeedY = randmoNumber (0, 5);
+			ball.move (ballSpeedX, ballSpeedY);
 		}
 		else if (ballCollision.intersects (leftPaddleCollision))
 		{
 			ballSpeedX = 5;
-			ballSpeedY = 3;
-			ball.move (ballSpeedX, ballSpeedY);
 			ballSpeedY = randmoNumber (-5, 0);
+			ball.move (ballSpeedX, ballSpeedY);
 		}
 		else if (ball.getPosition ().x > WIDTH)
 		{
 			scorePlayerFirst++;
+			
 			ball.setPosition (350, 200);
 			rightPaddle.setPosition (680, 200);
 			leftPaddle.setPosition (20, 200);
+			ballSpeedX = 5.0; 
+			ballSpeedY = 0.0;
+			ball.move (ballSpeedX, ballSpeedY);
 			wait (500);
 		}
 		else if (ball.getPosition ().x < 0)
@@ -158,20 +157,35 @@ int main (int argc, char * argv[])
 			ball.setPosition (350, 200);
 			rightPaddle.setPosition (680, 200);
 			leftPaddle.setPosition (20, 200);
+			ballSpeedX = 5.0;
+			ballSpeedY = 0.0;
+			ball.move (ballSpeedX, ballSpeedY);
 			wait (500);
 		}
-		else if (ball.getPosition ().y > HEIGHT)
+		else if (ball.getPosition ().y > (HEIGHT - 5))
 		{
-			ballSpeedX = 5;
-			ballSpeedY = randmoNumber (-5, 0);
+			ballSpeedX = -5;
+			ballSpeedY = randmoNumber (-5, 5);
+			if (ballSpeedY == -1 || ballSpeedY == 0 || ballSpeedY == 1)
+				ballSpeedY = randmoNumber (-5, 5);
 			ball.move (ballSpeedX, ballSpeedY);
 		}
-		else if (ball.getPosition ().y < 0)
+		else if (ball.getPosition ().y < 5)
 		{
 			ballSpeedX = 5;
-			ballSpeedY = 1;
+			ballSpeedY = randmoNumber (-5, 5);
+			if (ballSpeedY == -1 || ballSpeedY == 0 || ballSpeedY == 1)
+				ballSpeedY = randmoNumber (-5, 5);
 			ball.move (ballSpeedX, ballSpeedY);
 		}
+
+		std::string scoreGame = scorePlayerFirstConversionToString + SEPARATION + scorePlayerSecondConversionToString;
+
+		//Score
+		sf::Text scoreText (scoreGame, mainFont);
+		scoreText.setCharacterSize (30);
+		scoreText.setStyle (sf::Text::Bold);
+		scoreText.setPosition (325, 10);
 
 		mainWindow.clear (sf::Color::Black);
 		mainWindow.draw (scoreText);
