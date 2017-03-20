@@ -9,16 +9,22 @@
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
-int randmoNumber (int intervalMin, int intervalMax);
+int randomNumber (int intervalMin, int intervalMax);
 void wait (unsigned int millisecondsTime);
 
 int main (int argc, char * argv[])
 {
-	const int WIDTH = 700, HEIGHT = 400, DEPTH_OF_COLOR = 32, MAX_FPS = 60;
-	const float PADDLE_WIDTH = 20, PADDLE_HEIGHT = 90;
-	float ballSpeedX = 5.0, ballSpeedY = 0.0;
+	const int WIDTH = 700;
+	const int HEIGHT = 400; 
+	const int DEPTH_OF_COLOR = 32; 
+	const int MAX_FPS = 60;
+	const float PADDLE_WIDTH = 20;
+	const float PADDLE_HEIGHT = 90;
+	float ballSpeedX = 5.0
+	float ballSpeedY = 0.0;
 	const std::string SEPARATION = "|";
-	int scorePlayerFirst = 0, scorePlayerSecond = 0;
+	int scorePlayerFirst = 0; 
+	int scorePlayerSecond = 0;
 	
 	float ballRadius = 10.f;
 	sf::Vector2f paddleSize (PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -62,8 +68,6 @@ int main (int argc, char * argv[])
 	ball.setFillColor (sf::Color::Black);
 	ball.setOrigin (ballRadius / 2, ballRadius / 2);
 	ball.setPosition (350, 200);
-
-	
 
 	//Main settings of windows
 	sf::RenderWindow mainWindow (sf::VideoMode (WIDTH, HEIGHT, DEPTH_OF_COLOR), "PING-PONG", sf::Style::Titlebar | sf::Style::Close);
@@ -204,7 +208,7 @@ void wait (unsigned int millisecondsTime)
 }
 
 
-int randmoNumber (int intervalMin, int intervalMax)
+int randomNumber (int intervalMin, int intervalMax)
 {
 	std::random_device random;
 	std::mt19937 gen (random ());
