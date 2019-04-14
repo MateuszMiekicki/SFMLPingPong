@@ -3,5 +3,3 @@
 ##Authors:
 
 Mateusz Miękicki
-
-Michał Gibas (MadRussianHacker)
